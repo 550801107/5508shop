@@ -1,0 +1,7 @@
+.idea
+.svn
+composer.lock
+install.lock
+*.log
+itkee_github.zip
+runtime

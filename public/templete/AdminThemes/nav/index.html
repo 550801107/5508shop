@@ -1,0 +1,79 @@
+{extend name="layout/common_layout" /}
+{block name="body"}
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">导航管理</li>
+            <li class=""><a href="{:url('admin/nav/add')}">添加导航</a></li>
+        </ul>
+        <div class="layui-tab-content">
+            <form class="layui-form layui-form-pane" action="{:url('admin/nav/index')}" method="get">
+                <div class="layui-inline">
+                    <label class="layui-form-label">所属分类</label>
+                    <div class="layui-input-inline">
+                        <select name="nav_cid" required lay-verify="required">
+                            <option value=""></option>
+                            {foreach name="navcat_list" key="key" item="vv" }
+                            <option value="{$key}" {if condition="$key==$Request.get.nav_cid"} selected="selected"{/if}>{$vv}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn">搜索</button>
+                </div>
+            </form>
+            <hr>
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table">
+                    <thead>
+                    <tr>
+                        <th style="width: 60px;">展开</th>
+                        <th style="width: 30px;">ID</th>
+                        <th style="width: 30px;">排序</th>
+                        <th>导航名称</th>
+                        <th>导航分类名称</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach name="nav_level_list" item="vo"}
+                    {php}
+                        if($vo['level'] == '1'){
+                            $class_name = "level_one";
+                            $plus = "&#xe623;";
+                            $space = "";
+                        }elseif($vo['level'] == '2'){
+                            $class_name = "level_two";
+                            $plus = "&#xe623;";
+                            $space = "&nbsp;&nbsp;&nbsp;&nbsp;";
+                        }else{
+                            $class_name = "level_three";
+                            $plus = "";
+                            $space = "";
+                        }
+                    {/php}
+                    <tr class="{$class_name} level_{$vo['pid']}"  data-id="{$vo['id']}" data-pid="{$vo['pid']}">
+                        <td>{$space}<i class="layui-icon open_level" data-id="{$vo['id']}" style="font-size: 25px;">{$plus}</i></td>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.sort}</td>
+                        <td>{neq name="vo.level" value="1"}{php}for($i=1;$i<$vo['level'];$i++){echo  '&nbsp;&nbsp;&nbsp;└─';}{/php}{/neq} {$vo.name}</td>
+                        <td>{$navcat_list[$vo['nav_cid']]}</td>
+                        <td>{php}echo $vo['status']==1 ? '显示' : '隐藏';{/php}</td>
+                        <td>
+                            <a href="{:url('admin/nav/add',['pid'=>$vo['id'],'nav_cid'=>$vo['nav_cid']])}" class="layui-btn layui-btn-mini">添加子导航</a>
+                            <a href="{:url('admin/nav/edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                            <a href="{:url('admin/nav/delete',['id'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                        </td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{/block}
+{block name="js"}
+<script src="__ADMIN_TMPL__/temp/menu.js"></script>
+{/block}

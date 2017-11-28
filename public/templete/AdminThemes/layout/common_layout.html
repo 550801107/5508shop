@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>ITKEE_CN 后台管理系统</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="__JS__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__ADMIN_TMPL__/font/css/font-awesome.min.css">
+    <!--CSS引用-->
+    {block name="css"}{/block}
+    <link rel="stylesheet" href="__ADMIN_TMPL__/css/admin.css">
+    <!--[if lt IE 9]>
+    <script src="__JS__/html5shiv.min.js"></script>
+    <script src="__JS__/respond.min.js"></script>
+    <![endif]-->
+    {block name="css"}{/block}
+</head>
+
+<body>
+{block name="body"}{/block}
+<!--网站主体-->
+<script>
+    // 定义全局JS变量
+    var GV = {
+        base_url: "__STATIC__"
+    };
+</script>
+<!--JS引用-->
+<script src="__JS__/jquery.js"></script>
+<script src="__JS__/layui/lay/dest/layui.all.js"></script>
+<script src="__JS__/common.js"></script>
+{block name="js"}{/block}
+<!--页面JS脚本-->
+{block name="script"}{/block}
+</body>
+</html>

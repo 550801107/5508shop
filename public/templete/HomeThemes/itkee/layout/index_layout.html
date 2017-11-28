@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>商城首页</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="__STATIC__/home/css/iconfont/iconfont.css" rel="stylesheet"/>
+    <link href="__STATIC__/home/css/common.css" rel="stylesheet"/>
+    <link href="__STATIC__/home/css/home.css" rel="stylesheet"/>
+    {block name="css"}{/block}
+</head>
+<body>
+    <!-- head.start -->
+    {include file="layout/head"/}
+    <!-- head.end -->
+    {block name="body"}{/block}
+    
+    <!--脚部-->
+    {include file="layout/footer" /}
+    <!--脚部-->
+</body>
+<script src="__STATIC__/home/js/jquery.js"></script>
+<link rel="stylesheet" href="__STATIC__/home/js/slick/slick.css"/>
+<script src="__STATIC__/home/js/slick/slick.min.js"></script>
+<script src="__STATIC__/home/js/global.js"></script>
+{block name="js"}{/block}
+<script>
+    $('.home-full-banner').slick({
+        autoplay: true,
+        autoplaySpeed: 5000,
+        arrows: false,
+        dots: true,
+        fade: true
+      });
+
+    +function () {
+        var bigH=$('.side-category').height();
+        $(window).on('scroll resize load',function () {
+            var sTop=$(this).scrollTop(),
+            valve=$('.home-full-banner').offset().top+$('.home-full-banner').height(),
+            wH=$(this).height();
+
+            //控制导航显示
+            if (sTop>valve) {
+                $('.side-category').show();
+            }
+            else {
+                $('.side-category').hide();
+            }
+        })
+    }();
+     zAction.add({
+        'category-toggle':function () {
+            if ($(this).hasClass('on')) {
+                $(this).removeClass('on').prev().slideDown(200);
+            }
+            else {
+                $(this).addClass('on').prev().slideUp(200);
+            }
+        },
+    });
+</script>
+{block name="script"}{/block}
+</html>

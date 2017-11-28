@@ -1,0 +1,39 @@
+{extend name="layout/common_layout" /}
+{block name="body"}
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">导航分类管理</li>
+            <li class=""><a href="{:url('admin/navcat/add')}">添加导航分类</a></li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table">
+                    <thead>
+                    <tr>
+                        <th style="width: 30px;">ID</th>
+                        <th>导航分类名称</th>
+                        <th>标注</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach name="navcats" item="vo"}
+                    <tr>
+                        <td>{$vo.navcid}</td>
+                        <td>{$vo.name}</td>
+                        <td>{$vo.remark}</td>
+                        <td>{php}echo $vo['status']==1 ? '显示' : '隐藏';{/php}</td>
+                        <td>
+                            <a href="{:url('admin/navcat/edit',['id'=>$vo['navcid']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                            <a href="{:url('admin/navcat/delete',['id'=>$vo['navcid']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                        </td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{/block}

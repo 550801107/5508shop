@@ -1,0 +1,89 @@
+a:hover{color:#2277DA !important;}
+pre{border-left: 6px solid #F4ED87;background: #f8f8f8;}
+/* 头部 */
+.header{background-color: #373d41;}
+.avatar{color:#FFF;}
+
+/**字体**/
+.nav a,.nav-user span a{
+    color:#FFF;
+}
+.out-login a{
+    color:#FFF;
+}
+.icon-touxiang{
+    color:#FFF;
+}
+/**按钮**/
+.layui-btn{
+    background: #2277DA;
+}
+.layui-btn-normal{
+    background: #1E9FFF;
+}
+.layui-btn-warm{
+    background: #F7B824;
+}
+.layui-btn-danger{
+    background: #FF5722;
+}
+
+.layui-btn:hover,.layui-btn-mini:hover,.layui-btn-mini>a:hover,.layui-btn>a:hover{
+    color:#FFF !important;
+}
+.layui-btn-disabled:hover{
+    color:#2277DA !important;
+}
+.laypage-main *{
+    border-right: 1px solid #f4645f;
+    border-bottom: 1px solid #f4645f;
+}
+
+/**图标*/
+.fly-tip .fly-tip-stick{
+    background:#1E2328;
+}
+.fly-tip .fly-tip-jing{
+    background:#DC0811 ;
+}
+/**编辑器*/
+.fly-edit span{color:#2277DA ;}
+
+/**footer**/
+.footer{
+    background: #2e3033
+}
+.footer a{
+    color:#9d9d9d;
+}
+/**分页**/
+.pagination li.active{
+    background: #2277DA;
+}
+.fly-tip-jing>a,fly-tip-jing>a:hover{color:#FFF; !important;}
+.fly-tip-jing:hover{background: #f47b48
+}
+/*右侧覆盖*/
+.fly-panel-title {
+    position: relative;
+    height: 56px;
+    line-height: 56px;
+    padding: 0 15px;
+    border-bottom: 1px solid #E6E6E6;
+    margin-bottom: 5px;
+    background-color: #FFF;
+    border-radius: 2px 2px 0 0;
+    color: #333;
+}
+.fly-panel-title span {
+    color: #b2b2b2;
+    font-size: 10px;
+    padding-right: 5px;
+    padding-left: 4px;
+    line-height: 11px;
+    background: #FFF;
+    display: inline-block;
+    position: absolute;
+    bottom: -5px;
+    left: 10px;
+}

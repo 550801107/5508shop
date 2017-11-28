@@ -1,0 +1,96 @@
+{extend name="layout/common_layout" /}
+{block name="body"}
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">后台菜单</li>
+            <li class=""><a href="{:url('admin/menu/add')}">添加菜单</a></li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table">
+                    <thead>
+                    <tr>
+                        <th style="width: 60px;">展开</th>
+                        <th style="width: 50px;">排序</th>
+                        <th style="width: 30px;">ID</th>
+                        <th>菜单名称</th>
+                        <th>控制器方法</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach name="admin_menu_level_list" item="vo"}
+                    {php}
+                        if($vo['level'] == '1'){
+                            $class_name = "level_one";
+                            $plus = "&#xe623;";
+                            $space = "";
+                        }elseif($vo['level'] == '2'){
+                            $class_name = "level_two";
+                            $plus = "&#xe623;";
+                            $space = "&nbsp;&nbsp;&nbsp;";
+                        }else{
+                            $class_name = "level_three";
+                            $plus = "&#xe623;";
+                            $space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                        }
+                    {/php}
+                    <tr class="{$class_name} level_{$vo['pid']}"  data-id="{$vo['id']}" data-pid="{$vo['pid']}" style="">
+                        {php}$url = url('admin/menu/setStatus',['id'=>$vo['id']]);{/php}
+                        <td>{$space}<i class="layui-icon open_level" data-id="{$vo['id']}" style="font-size: 25px;">{$plus}</i></td>
+                        <td>
+                            <input class="layui-input" name="sort" required="" lay-verify="required" placeholder="" autocomplete="off" type="text" id="change_sort_{$vo['id']}" value="{$vo.sort}" data-url="{$url}" onchange="change_sort({$vo['id']})">
+                        </td>
+                        <td>{$vo.id}</td>
+                        <td>{neq name="vo.level" value="1"}{php}for($i=1;$i<$vo['level'];$i++){echo '&nbsp;&nbsp;&nbsp;└─';}{/php}{/neq} {$vo.title}</td>
+                        <td>{$vo.name}</td>
+                        <td>
+                            {php}
+                                if($vo['status']==1){
+                                    echo '<a href="'.$url.'" data-param="status=0" class="layui-btn layui-btn-mini ajax-post">显示</a>';
+                                }else{
+                                    echo '<a href="'.$url.'" data-param="status=0" class="layui-btn layui-btn-danger layui-btn-mini ajax-post">隐藏</a>';
+                                }
+                            {/php}
+                        </td>
+                        <td>
+                            <a href="{:url('admin/menu/add',['pid'=>$vo['id']])}" class="layui-btn layui-btn-mini">添加子菜单</a>
+                            <a href="{:url('admin/menu/edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                            <a href="{:url('admin/menu/delete',['id'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                        </td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{/block}
+{block name="js"}
+<script src="__ADMIN_TMPL__/temp/menu.js"></script>
+{/block}
+{block name="script"}
+<script>
+    //修改排序值
+    function change_sort(id){
+        var sort = $("#change_sort_"+id).val();
+        var _url = $("#change_sort_"+id).attr("data-url");
+        $.ajax({
+            type:'POST',
+            url:_url,
+            dataType: "json",
+            data:{"sort":sort},
+            success:function(info){
+                if (info.code === 1) {
+                    setTimeout(function () {
+                        location.href = info.url;
+                    }, 1000);
+                }
+                layer.msg(info.msg);
+            }
+        })
+    }
+</script>
+{/block}

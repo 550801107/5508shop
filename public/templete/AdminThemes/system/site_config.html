@@ -1,0 +1,183 @@
+{extend name="layout/common_layout" /}
+{block name="body"}
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this" lay-id="site">站点配置</li>
+            <li lay-id="email">邮箱配置</li>
+            <li lay-id="theme">系统配置</li>
+            <li lay-id="theme">QQ登录配置</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" action="{:url('admin/system/updateConfig')}" method="post">
+                    <input type="hidden" name="config_type" value="site_config" />
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">网站标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="site_config[site_title]" value="{$site_config.site_title|default=''}" required  lay-verify="required" placeholder="请输入网站标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">SEO标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="site_config[seo_title]" value="{$site_config.seo_title|default=''}" placeholder="请输入SEO标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">SEO关键字</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="site_config[seo_keyword]" value="{$site_config.seo_keyword|default=''}" placeholder="请输入SEO关键字" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">SEO说明</label>
+                        <div class="layui-input-block">
+                            <textarea name="site_config[seo_description]" placeholder="请输入SEO说明" class="layui-textarea">{$site_config.seo_description|default=''}</textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">版权信息</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="site_config[site_copyright]" value="{$site_config.site_copyright|default=''}" placeholder="请输入版权信息" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">ICP备案号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="site_config[site_icp]" value="{$site_config.site_icp|default=''}" placeholder="请输入版权信息" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">统计代码</label>
+                        <div class="layui-input-block">
+                            <textarea name="site_config[site_tongji]" placeholder="请输入统计代码" class="layui-textarea">{$site_config.site_tongji|default=''}</textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="*">提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-form layui-tab-item">
+                <div class="layui-form-item">
+                    <form class="layui-form form-container" action="{:url('admin/system/updateConfig')}" method="post">
+                        <input type="hidden" name="config_type" value="email_config" />
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">发件人</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="email_config[sender]" value="{$email_config.sender|default=''}" required  lay-verify="required" placeholder="请输入发件人" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">邮箱地址</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="email_config[address]" value="{$email_config.address|default=''}" placeholder="请输入邮箱地址" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">SMTP服务器</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="email_config[smtp]" value="{$email_config.smtp|default=''}" placeholder="SMTP服务器" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">连接方式</label>
+                            <div class="layui-input-block">
+                                <select name="email_config[smtpsecure]">
+                                    <option value=""></option>
+                                    <option value="ssl">ssl</option>
+                                    <option value="tls">tls</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">SMTP服务器端口
+                            </label>
+                            <div class="layui-input-block">
+                                <input type="text" name="email_config[smtp_port]" value="{$email_config.smtp_port|default=''}" placeholder="SMTP服务器端口" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">邮箱账号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="email_config[loginname]" value="{$email_config.loginname|default=''}" placeholder="邮箱账号" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">邮箱密码</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="email_config[password]" value="{$email_config.password|default=''}" placeholder="邮箱密码" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="*">提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="layui-form layui-tab-item">
+                <form class="layui-form form-container" action="{:url('admin/system/updateConfig')}" method="post">
+                    <input type="hidden" name="config_type" value="system_config" />
+                    <input type="hidden" name="system_config[app_debug]" value="false" />
+                    <input type="hidden" name="system_config[app_trace]" value="false" />
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">调试模式</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="system_config[app_debug]" {if condition="$system_config.app_debug == 'true'"}checked{/if} value="true" lay-skin="switch" />
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">应用Trace</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="system_config[app_trace]" {if condition="$system_config.app_trace == 'true'"}checked{/if} value="true" lay-skin="switch" />
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="*">提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-form layui-tab-item">
+                <form class="layui-form form-container" action="{:url('admin/system/updateConfig')}" method="post">
+                    <input type="hidden" name="config_type" value="qq_config" />
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">APP_ID</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="qq_config[app_id]" value="{$qq_config.app_id|default=''}" required  lay-verify="required" placeholder="QQ互联APP_ID" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">APP_KEY</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="qq_config[app_key]" value="{$qq_config.app_key|default=''}" placeholder="请输入APP_KEY" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">回调地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="qq_config[call_back]" value="{$qq_config.call_back|default=''}" placeholder="请输入回调地址" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="*">提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{/block}

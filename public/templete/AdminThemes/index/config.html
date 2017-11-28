@@ -1,0 +1,127 @@
+{extend name="layout/common_layout" /}
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="all">
+{/block}
+{block name="body"}
+<!-- 首页信息 -->
+<div class="row system">
+   <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+       <table class="layui-table larry-table-info">
+           <colgroup>
+               <col width="150">
+               <col>
+           </colgroup>
+           <tbody>
+           <tr>
+               <td><span class="tit">网站域名:</span></td>
+               <td><span class="info iframe">{$config.url}</span></td>
+           </tr>
+           <tr>
+               <td><span class="tit">服务器操作系统:</span></td>
+               <td>{$config.server_os}</td>
+           </tr>
+           <tr>
+               <td><span class="tit">官网地址:</span></td>
+               <td><span class="info"><a href="http://www.itkee.cn" class="official" target="_blank">http://www.itkee.cn</a></span></td>
+           </tr>
+           <tr>
+               <td><span class="tit">服务器端口:</span></td>
+               <td>{$config.server_port}</td>
+           </tr>
+           <tr>
+               <td><span class="tit">网站目录:</span></td>
+               <td>{$config.document_root}</td>
+           </tr>
+           <tr>
+               <td><span class="tit">服务器环境:</span></td>
+               <td>{$config.server_soft}</td>
+           </tr>
+           <tr>
+               <td><span class="tit">PHP版本:</span></td>
+               <td>{$config.php_version}</td>
+           </tr>
+           <tr>
+               <td><span class="tit">MySQL版本:</span></td>
+               <td>{$config.mysql_version}</td>
+           </tr>
+           <tr>
+               <td><span class="tit">最大上传限制:</span></td>
+               <td>{$config.max_upload_size}</td>
+           </tr>
+           </tbody>
+       </table>
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+        <table class="layui-table larry-table-info">
+            <colgroup>
+                <col width="150">
+                <col>
+            </colgroup>
+            <tbody>
+            <tr>
+                <td><span class="tit">系统名称:</span></td>
+                <td><a href="http://www.itkee.cn" title="ITKEE.CN社区" class="tit" target="_blank"><span class="info">ITKEE后台管理系统</span></a></td>
+            </tr>
+            <tr>
+                <td><span class="tit">系统官网:</span></td>
+                <td><a href="http://www.itkee.cn" title="ITKEE.CN社区" class="tit" target="_blank"><span class="info">ITKEE.CN</span></a></td>
+            </tr>
+            <tr>
+                <td><span class="tit">社区交流:</span></td>
+                <td><a href="http://www.itkee.cn/topic.html" title="ITKEE.CN社区" class="tit" target="_blank"><span class="info">ITKEE社区交流</span></a></td>
+            </tr>
+            <tr>
+                <td><span class="tit">总策划:</span></td>
+                <td><a href="http://superman.itkee.cn">SuperMan</a></td>
+            </tr>
+            <tr>
+                <td><span class="tit">系统版本:</span></td>
+                <td><div id="version">{$Think.ITKEE_VERSION}</div></td>
+            </tr>
+            <tr>
+                <td><span class="tit">PHP版本要求:</span></td>
+                <td>>php5.4 + </td>
+            </tr>
+
+            <tr>
+                <td><span class="tit">技术团队:</span></td>
+                <td><a href="http://www.itkee.cn" target="_blank">ITKEE社区</a></td>
+            </tr>
+            <tr>
+                <td><span class="tit">官方交流群:</span></td>
+                <td><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=d31c9823e8fdbdc059f8c285bde44f2e6f0357fbf58ca103955e0376a0a908b0"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="[ITKEE社区]PHP/前端/交流" title="[ITKEE社区]PHP/前端/交流"></a></td>
+            </tr>
+            <tr>
+                <td><span class="tit">ITKEE通知:</span></td>
+                <td><div id="notice"></div></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script>
+    $(function(){
+        var version = "{$Think.ITKEE_VERSION}";
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: 'http://service.itkee.cn/',
+            data: '',
+            success: function (data) {
+                if(data){
+                    if(data.version !== version){
+                        $("#version").append(" 发现新版本");
+                    }
+                    var html = '<a href="'+data.url+'" target="_blank">'+data.title+'</a>';
+                }else{
+                    var html = "暂无系统通知";
+                }
+                $("#notice").html(html);
+            }
+        });
+
+    });
+</script>
+{/block}

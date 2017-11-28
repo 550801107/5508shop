@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Apple devices fullscreen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Apple devices fullscreen -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>ITKEE_CN 后台管理系统 - 您需要登录后才可以使用本功能</title>
+
+    <link href="__ADMIN_TMPL__/css/login.css" rel="stylesheet" type="text/css">
+    <link href="__ADMIN_TMPL__/font/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src="__JS__/jquery.js" type="text/javascript"></script>
+    <script src="__ADMIN_TMPL__/resource/js/common.js" type="text/javascript"></script>
+    <script src="__ADMIN_TMPL__/resource/js/jquery.validation.min.js"></script>
+    <script src="__ADMIN_TMPL__/js/jquery.supersized.min.js" ></script>
+    <script src="__ADMIN_TMPL__/js/jquery.progressBar.js" type="text/javascript"></script>
+</head>
+
+<body>
+<!--主体-->
+{block name="body"}{/block}
+
+<script>
+    // 定义全局JS变量
+    var GV = {
+        current_controller: "admin/{$controller|default=''}/",
+        base_url: "__STATIC__"
+    };
+</script>
+{block name="js"}{/block}
+<!--页面JS脚本-->
+{block name="script"}{/block}
+<script>
+    //固定层移动
+    $(function(){
+        //管理显示与隐藏
+        $("#admin-manager-btn").click(function () {
+            if ($(".manager-menu").css("display") == "none") {
+                $(".manager-menu").css('display', 'block');
+                $("#admin-manager-btn").attr("title","关闭快捷管理");
+                $("#admin-manager-btn").removeClass().addClass("arrow-close");
+            }
+            else {
+                $(".manager-menu").css('display', 'none');
+                $("#admin-manager-btn").attr("title","显示快捷管理");
+                $("#admin-manager-btn").removeClass().addClass("arrow");
+            }
+        });
+    });
+</script>
+</body>
+</html>
